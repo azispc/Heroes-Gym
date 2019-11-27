@@ -14,11 +14,13 @@ if(isset($_POST['Submit'])) {
 	$kode_pel = mysqli_real_escape_string($mysqli, $_POST['kode_pel']);
 	$nama_pel = mysqli_real_escape_string($mysqli, $_POST['nama_pel']);
 	$jk = mysqli_real_escape_string($mysqli, $_POST['jk']);
+	$status = mysqli_real_escape_string($mysqli, $_POST['status_pel']);
+	$harga = mysqli_real_escape_string($mysqli, $_POST['harga']);
 	$telp = mysqli_real_escape_string($mysqli, $_POST['telp']);
 	$alamat = mysqli_real_escape_string($mysqli, $_POST['alamat']);
 
 	// checking empty fields
-	if(empty($kode_pel) || empty($nama_pel) || empty($jk) || empty($telp) || empty($alamat) || empty($start) || empty($ends)) {
+	if(empty($kode_pel) || empty($nama_pel) || empty($jk) || empty($telp) || empty($alamat) || empty($start) || empty($ends) || empty($status) || empty($harga)) {
 
 		if(empty($kode_pel)) {
 			echo "<font color='red'>kode pelanggan field is empty.</font><br/>";
@@ -49,15 +51,23 @@ if(isset($_POST['Submit'])) {
 				echo "<font color='red'>end field is empty.</font><br/>";
 		}
 
+		if(empty($status)) {
+				echo "<font color='red'>Statu field is empty.</font><br/>";
+		}
+
+		if(empty($harga)) {
+				echo "<font color='red'>end field is empty.</font><br/>";
+		}
+
 		//link to the previous page
 		echo "<br/><a href='javascript:self.history.back();'>Go Back</a>";
 	} else {
 		// if all the fields are filled (not empty)
 
 		//insert data to database
-		$result = mysqli_query($mysqli, "INSERT INTO pelanggan(nama_pel,jk,telp,alamat) VALUES('$nama_pel','$jk','$telp','$alamat');");
+		$result = mysqli_query($mysqli, "INSERT INTO pelanggan(nama_pel,jk,telp,alamat,status_pel) VALUES('$nama_pel','$jk','$telp','$alamat','$status');");
 		$last_id = mysqli_insert_id($mysqli);
-		$result1 = mysqli_query($mysqli, "INSERT INTO member(id_pelanggan,kode_pel,start, ends) VALUES('$last_id','$kode_pel','$start','$ends');");
+		$result1 = mysqli_query($mysqli, "INSERT INTO member(id_pelanggan,kode_pel,start, ends, harga) VALUES('$last_id','$kode_pel','$start','$ends', '$harga');");
 		if ($result1 === TRUE) {
 		echo "New record created successfully";
 		header("Location: index.php");

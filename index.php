@@ -21,9 +21,11 @@ $result = mysqli_query($mysqli, "SELECT * FROM pelanggan, member WHERE pelanggan
 		<td>Nama Pelanggan</td>
 		<td>Jenis Kelamin</td>
 		<td>Telpon</td>
+		<td>Status</td>
 		<td>Start Member (Y/M/D)</td>
 		<td>End Member (Y/M/D)</td>
     <td>Sisa Member</td>
+		<td>Harga</td>
 		<td>Alamat</td>
 		<td>Edit/Delete</td>
 	</tr>
@@ -48,9 +50,11 @@ $result = mysqli_query($mysqli, "SELECT * FROM pelanggan, member WHERE pelanggan
 			echo "<td>".$res['nama_pel']."</td>";
 			echo "<td>".$res['jk']."</td>";
 			echo "<td>".$res['telp']."</td>";
+			echo "<td>".$res['status_pel']."</td>";
 			echo "<td>".$res['start']."</td>";
 			echo "<td>".$res['ends']."</td>";
 			echo "<td>$days<a> hari</a></td>";
+			echo "<td>".$res['harga']."</td>";
 			echo "<td>".$res['alamat']."</td>";
 			echo "<td><a href=\"edit.php?id=$res[id_pel]\">Edit</a> | <a href=\"delete.php?id=$res[id_pel]\" onClick=\"return confirm('Are you sure you want to delete?')\">Delete</a></td>";
 		}else {
@@ -60,9 +64,11 @@ $result = mysqli_query($mysqli, "SELECT * FROM pelanggan, member WHERE pelanggan
 			echo "<td bgcolor='red'>".$res['nama_pel']."</td>";
 			echo "<td bgcolor='red'>".$res['jk']."</td>";
 			echo "<td bgcolor='red'>".$res['telp']."</td>";
+			echo "<td bgcolor='red'>".$res['staus_pel']."</td>";
 			echo "<td bgcolor='red'>".$res['start']."</td>";
 			echo "<td bgcolor='red'>".$res['ends']."</td>";
 			echo "<td bgcolor='red'>$days<a> hari</a></td>";
+			echo "<td bgcolor='red'>".$res['harga']."</td>";
 			echo "<td bgcolor='red'>".$res['alamat']."</td>";
 			echo "<td><a href=\"edit.php?id=$res[id_pel]\">Edit</a> | <a href=\"delete.php?id=$res[id_pel]\" onClick=\"return confirm('Are you sure you want to delete?')\">Delete</a></td>";
 

@@ -13,9 +13,11 @@ if(isset($_POST['update']))
 	$start = mysqli_real_escape_string($mysqli, $_POST['start']);
 	$ends = mysqli_real_escape_string($mysqli, $_POST['ends']);
 	$alamat = mysqli_real_escape_string($mysqli, $_POST['alamat']);
+	$status = mysqli_real_escape_string($mysqli, $_POST['status_pel']);
+	$harga = mysqli_real_escape_string($mysqli, $_POST['harga']);
 
 	// checking empty fields
-	if(empty($kode_pel) || empty($nama_pel) || empty($jk) || empty($telp) || empty($alamat) || empty($start) || empty($ends)) {
+	if(empty($kode_pel) || empty($nama_pel) || empty($jk) || empty($telp) || empty($alamat) || empty($start) || empty($ends) || empty($status) || empty($harga)) {
 
 		if(empty($kode_pel)) {
 			echo "<font color='red'>Kode field is empty.</font><br/>";
@@ -42,10 +44,16 @@ if(isset($_POST['update']))
 		if(empty($ends)){
 				echo "<font color='red'>ends field is empty.</font><br/>";
 		}
+		if(empty($status)){
+				echo "<font color='red'>status field is empty.</font><br/>";
+		}
+		if(empty($harga)){
+				echo "<font color='red'>harga field is empty.</font><br/>";
+		}
 
 	} else {
 		//updating the table
-		$result1 = mysqli_multi_query($mysqli, "UPDATE pelanggan JOIN member SET pelanggan.nama_pel='$nama_pel',pelanggan.jk='$jk', pelanggan.telp='$telp', pelanggan.alamat='$alamat', member.kode_pel='$kode_pel', member.start='$start', member.ends='$ends' WHERE pelanggan.id_pel=$id and member.id_pelanggan=$id");
+		$result1 = mysqli_multi_query($mysqli, "UPDATE pelanggan JOIN member SET pelanggan.status_pel='$status',pelanggan.nama_pel='$nama_pel',pelanggan.jk='$jk', pelanggan.telp='$telp', pelanggan.alamat='$alamat', member.harga='$harga', member.kode_pel='$kode_pel', member.start='$start', member.ends='$ends' WHERE pelanggan.id_pel=$id and member.id_pelanggan=$id");
 		if($result1 == FALSE){
 				echo "<font color='red'>ends field is empty.</font><br/>".$mysqli->error;
 			}
@@ -70,6 +78,8 @@ while($res = mysqli_fetch_array($result))
 	$alamat=$res['alamat'];
 	$start=$res['start'];
 	$ends=$res['ends'];
+	$status=$res['status_pel'];
+	$harga=$res['harga'];
 }
 ?>
 <html>
@@ -112,6 +122,16 @@ while($res = mysqli_fetch_array($result))
 			<tr>
 				<td>End Member</td>
 				<td><input type="date" name="ends" value="<?php echo $ends;?>"></td>
+			</tr>
+
+			<tr>
+				<td>Status</td>
+				<td><input type="text" name="status_pel" value="<?php echo $status;?>"></td>
+			</tr>
+
+			<tr>
+				<td>Harga</td>
+				<td><input type="text" name="harga" value="<?php echo $harga;?>"></td>
 			</tr>
 
 			<tr>
